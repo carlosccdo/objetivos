@@ -1,0 +1,183 @@
+  *{
+        font-family: 'Raleway', Arial, sans-serif;
+       
+        overflow: hidden;
+
+
+    }
+
+
+
+
+
+ select{
+        padding: 0.13em;
+    }
+
+table {
+
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    font-size: 12px;
+    margin:0px,45px,0px,45px;     
+    width: 100%; 
+    text-align: left;    
+    border-collapse: collapse; 
+    margin: 0 auto;
+
+}
+
+th {     
+	     font-size: 18px;
+    font-weight: 600;
+    padding: 8px;
+    background: antiquewhite;
+    border-top: 4px solid antiquewhite;
+    border-bottom: 1px solid #fff;
+    color: #74777b;
+}
+
+td {   
+	width: 100px; 
+    font-size: 18px;
+	padding: 8px;     
+    background: antiquewhite;
+	    
+	border-bottom: 1px solid #fff;
+      
+    border-top: 1px solid transparent; 
+}
+tr:nth-child(2n+1){
+
+    background: white;
+}
+
+
+/**tr:hover td { 
+	background: #d0dafd; 
+	color: #339; 
+}**/
+
+#selecObjetivo,.hid,#hid2{
+  display:none;
+
+
+}
+#objetivosTabla{
+
+background: #e8edff; 
+
+}
+.esconder{
+
+    display: none;
+}
+ul{  
+list-style-type:none;  
+}  
+
+#register_form{
+
+    width: 50%;
+    float: left;
+}
+.widthinput{
+
+    width: 60%;
+}
+
+.widthlabel{
+    display: inline-block;
+    text-align: right;
+    width: 33%;
+}
+#section-bar-2,#section-bar-3{
+    height: 500px;
+    overflow: auto;
+}
+
+
+
+
+#imagenobjetivo{
+width: 130px;
+height: 130px;
+position: relative;
+overflow: hidden;
+}
+#imagenobjetivo img{
+width: 100%;
+position: relative;
+overflow: hidden;
+}
+#enviar-btn{
+
+    background: #2CC185;
+    color: white;
+    width: 63%;
+    height: 40px;
+    border-radius: 2%;
+}
+#nombreimg{
+
+    font-size: 15px;
+}
+
+
+#messagesObjetivo{
+
+
+width: 50%;
+    text-align: center;
+    
+}
+#sexoInput,#tiporadio{
+    float: left;
+}
+
+#cerrar{
+
+    position: absolute;
+    top: 22px;
+    right: 32px;
+    color: #2CC185;
+}
+
+.rowsubobjetivo td{
+
+    background-color: #E6EBE0;
+    
+    border-width: 0;
+}
+
+
+#section-bar-3 input,#section-bar-3 textarea{
+
+    
+    background-color: antiquewhite;
+    border-width: 0;
+    color: gray;
+}
+
+#section-bar-3 .rowsubobjetivo input,#section-bar-3 .rowsubobjetivo textarea{
+
+    
+    background-color: #E6EBE0;
+    border-width: 0;
+    color: gray;
+
+}
+
+
+.zoom{
+        transition: 0.2s ease;
+        -moz-transition: 0.2s ease; /* Firefox */
+        -webkit-transition: 0.2s ease; /* Chrome - Safari */
+        -o-transition: 0.2s ease; /* Opera */
+    }
+    .zoom:hover{
+        transform : scale(1.01);
+        -moz-transform : scale(1.01); /* Firefox */
+        -webkit-transform : scale(1.01); /* Chrome - Safari */
+        -o-transform : scale(1.01); /* Opera */
+        -ms-transform : scale(1.01); /* IE9 */
+    }
