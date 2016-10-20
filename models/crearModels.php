@@ -1,7 +1,7 @@
 <?php 
-require_once('query.php');
+require_once('conexion.php');
 
-class crearModels extends query {
+class crearModels extends conexion {
 
 	public function __construct() { 
       parent::__construct();
@@ -11,7 +11,6 @@ class crearModels extends query {
 
 
 public  function crearObjetivo($objetivo,$obj,$selectSub,$nombreimg,$descripcion,$genero){
-
 
 
 //saber si el el nombre existe en la base de datos
@@ -25,7 +24,6 @@ public  function crearObjetivo($objetivo,$obj,$selectSub,$nombreimg,$descripcion
 
 								     $existe= $ex['nombre_objetivo'];           
 		                    };
-		 		
 		 	}
 
 		 	else if($obj=="nuevoSubObjetivo"){	
@@ -34,22 +32,13 @@ public  function crearObjetivo($objetivo,$obj,$selectSub,$nombreimg,$descripcion
 
 								$existe= $ex['nombre_subobjetivo'];               
 		                    };
-
 			}
-
-
 
 			if($existe==$objetivo){
 
-
 				echo "<p>el nombre ya existe</p>";
 
-
-
 			}else{
-
-
-
 
 
 			$directorioimg= 'img/';
@@ -76,11 +65,7 @@ public  function crearObjetivo($objetivo,$obj,$selectSub,$nombreimg,$descripcion
 
 //recoge si es objetivo o subobjetivo
 
-			
-			
-
-			
-
+	
 		 	if($obj=="nuevoObjetivo"){
 		 		Db::getInstance()->executeS("INSERT INTO ps_objetivos (nombre_objetivo,descripcion,img,hombre,mujer) VALUES ('$objetivo','$descripcion','$ruta','$hombre','$mujer')");
 		 	}
@@ -93,15 +78,11 @@ public  function crearObjetivo($objetivo,$obj,$selectSub,$nombreimg,$descripcion
 
 			}
 
-
-
 //muestra los resultados
 				 
 			 $objs = Db::getInstance()->executeS("SELECT * FROM ps_objetivos where nombre_objetivo = '$objetivo' ");
-				 						 				
-						
-
-						    foreach($objs as $obj){
+				 						 									
+					  foreach($objs as $obj){
 
 						//echo  "<div> nombre:".$obj['nombre_objetivo'] ."</div><div>descrpción:".$obj['descripcion'] ."</div><div id='imagenobjetivo'>imagen:<img  src='" . $obj['img'] . "'></div>";   
 						    	
@@ -110,6 +91,26 @@ public  function crearObjetivo($objetivo,$obj,$selectSub,$nombreimg,$descripcion
 		                    echo  "<p>Objetivo creado </p>";
 	 			}
 
+}
+
+
+
+public function refrescarObjetivosDesplegable($val){
+
+
+	 		$objs = Db::getInstance()->executeS("SELECT * FROM ps_objetivos");
+
+	  					$add .= " <option value='1'>seleccionar...</option>";
+                                                               
+  
+                       foreach($objs as $obj){
+
+                        $add .=  "<option>".$obj['nombre_objetivo'] ."</option>"; 
+
+                         };
+
+                         return $add;
+                                                                
 }
 
 

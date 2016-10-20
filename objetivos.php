@@ -28,22 +28,22 @@
                <?php
                 session_start();
                 if(!isset($_SESSION["usuario"]) || $_SESSION["usuario"]==null){
-                  header("Location:loging.php");
+                  header("Location:login.php");
                   exit();
 
                 }
-             echo "<div id='cerrar'><span> Bienvenido " . $_SESSION['usuario']. "</span><br> <a style= 'color: grey; text-decoration: none' href='loging.php'>Cerrar session</a></div>";
+             echo "<div id='cerrar'><span> Bienvenido " . ucfirst($_SESSION['usuario']) . "</span><br> <a style= 'color: grey; text-decoration: none' href='login.php'>Cerrar session</a></div>";
             ?>
                 <h1>Focus on your goal <span>Crea objetivos y vinculalos a tus productos</span></h1>
             </header>
 
-            <section>
+            <section id="maidContenedor">
                     <div class="tabs tabs-style-bar">
                          <nav>
                             <ul>
                                <li><a href="#section-bar-1" class="icon icon-box"><span>Crear objetivos</span></a></li>
                                <li id="refresh" ><a href="#section-bar-3" class="icon icon-display"><span>Editar objetivos</span></a></li>
-                               <li><a href="#section-bar-2" class="icon icon-upload"><span>Vincular objetivos</span></a></li>
+                               <li id="refreshbloqueTres"><a href="#section-bar-2" class="icon icon-upload"><span>Vincular objetivos</span></a></li>
                                <!--<li><a href="#section-bar-4" class="icon icon-tools"><span>d</span></a></li>-->
                                
                             </ul>
@@ -53,58 +53,61 @@
 
                                   <!--crear objetivos-->
                                       <section id="section-bar-1">
+                                        <div id="centrar-Columna-uno">
                                              <div id="register_form">
                                                     <form name="register" method="post" action=""  >
 
 
-                                                            <!--selecionar objetivo o subobjetivos-->
+                                                             <!--selecionar objetivo o subobjetivos-->
+                                                             <div class="linea">
+                                                             <label class="celda1" id="tiporadio" for="nombre">Tipo:</label>
+                                                              <div class="celda" id="seleccionar">
+                                                                <input type="radio" name="tipo" id="checkobj" value="Objetivos" checked> Objetivo<br>
+                                                                <input type="radio" name="tipo" id="checksub" value="Sub-objetivos"> Sub-objetivo
+                                                              </div>
+                                                              </div>
 
-                                                           <label class="widthlabel" id="tiporadio" for="nombre">Tipo:</label>
-
-                                                           <div class="widthinput" id="seleccionar">
-                                                            <input type="radio" name="tipo" id="checkobj" value="Objetivos" checked> Objetivo<br>
-                                                             <input type="radio" name="tipo" id="checksub" value="Sub-objetivos"> Sub-objetivo
-                                                             </div>
-
-                                                           
-                                                            <br class="hid"> 
-
-
-                                                            <!--selccionar objetivo-->
-                                                              <label class="widthlabel" id="hid2" for="nombre">Objetivo padre</label>
-                                                            <select class="widthinput" id="selecObjetivo">
-                                                             
-
-                                                             </select>  <br><br class="hid"> 
-
+                                                              <!--selccionar objetivo-->
+                                                              <div class="linea" id="hid2">
+                                                              <label class="celda1"  for="nombre">Objetivo<br>padre</label>
+                                                              <select class="celda" id="selecObjetivo"></select>
+                                                              </div>
                                                          
-                                                               <!--Escribir nombre de  objetivo-->
-                                                            <label class="widthlabel" for="nombre">Nombre:</label>
-                                                            <input class="widthinput" type="text" id="name" name="name" /><br><br>
+                                                              <!--Escribir nombre de  objetivo-->
+                                                              <div class="linea">
+                                                              <label class="celda1" for="nombre">Nombre:</label>
+                                                              <input class="celda" type="text" id="name" name="name" />
+                                                              </div>
+
+                                                               <!--Seleccionar genero-->
+                                                               <div class="linea" id="ocultarGenero">
+                                                              <label id="sexoInput" class="celda1" for="sexo">Genero:</label>
+                                                              <div class="celda" id="bloquegenero">
+                                                                <input type="radio" name="sexo" id="checkgenero" value="hm" checked> Femenino/Masculino<br>
+                                                                <input type="radio" name="sexo" id="" value="m"> Femenino<br>
+                                                                <input type="radio" name="sexo" id="" value="h"> Masculino
+                                                              </div>
+                                                              </div>
 
 
-                                                            <label id="sexoInput" class="widthlabel" for="sexo">Genero:</label>
-                                                             <div class="widthinput" id="bloquegenero">
-                                                             <input type="radio" name="sexo" id="checkgenero" value="hm" checked> Femenino/Masculino<br>
-                                                             <input type="radio" name="sexo" id="" value="m"> Femenino<br>
-                                                             <input type="radio" name="sexo" id="" value="h"> Masculino<br><br>
-                                                             </div>
-                                                            
-                                                            <label  class="widthlabel" for="nombre">Description:</label>
-                                                            <textarea id="descripcion" class="widthinput"></textarea> <br><br>
+                                                               <!--Descripción-->
+                                                               <div class="linea">
+                                                                <label  class="celda1" for="nombre">Description:</label>
+                                                                <textarea id="descripcion" class="celda"></textarea> 
+                                                               </div>
 
-                                                            <label class="widthlabel" for="nombre">Imagen:</label>
-                                                                
-                                                             <input type="file" name="nombreimg" id="nombreimg">
-                                                                  
-                                                              
-                                                           
-                                                             
-                                                            
-                                                            <div class="widthlabel">
-                                                             <input name="submit" type="submit" value="Crear" id="enviar-btn" />
-                                                           </div>
-                                                     </form>
+                                                               <!--Imagen-->
+                                                                <div class="linea">
+                                                                <label class="celda1" for="nombre">Imagen:</label>                                                                
+                                                               <input class="celda" type="file" name="nombreimg" id="nombreimg" value="hola"> 
+                                                                </div> 
+                                                                 <!--Enviar-->
+                                                                 <div class="linea">
+                                                                 <div class="celda1">
+                                                                   <input name="submit" type="submit" value="Crear" id="enviar-btn" />
+                                                                 </div>
+                                                                 </div>
+                                                       </form>
                                                    
 
                                                
@@ -119,7 +122,7 @@
 
                                              </div>
 
-
+                                           </div>
                                    </section>
 
                                    <!--editar objetivos-->
@@ -129,6 +132,7 @@
                                    
 
                                    </section>
+                                   
 
 
                                  <!--añadir objetivo a productos-->

@@ -1,6 +1,6 @@
 <?php
  require_once('../../../config/config.inc.php');
-require_once('../models/query.php');
+require_once('../models/conexion.php');
 
 
 $usuario = utf8_decode($_POST['usuario']);
@@ -28,7 +28,7 @@ $pw;
 								header("Location: ../objetivos.php");
 						    }else{
 
-						    	header("Location: ../loging.php");
+						    	header("Location: ../login.php");
 						    	exit();
 						    }
 

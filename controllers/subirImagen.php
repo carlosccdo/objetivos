@@ -14,11 +14,16 @@ $imagen = "../img/";
 $nombre= strtolower(str_replace(' ', '', $_POST['objetivoNombre']));
 
 
-$imagen .=  $nombre.'.'.$ext;
+
+$imagen.=$nombre.'.'.$ext;
+
+if(file_exists('../img'.$nombre.'.*')) {
+chown('../img'.$nombre.'.*', 666);
+unlink('../img'.$nombre.'.*');
+}
 
 
-
-if(move_uploaded_file($_FILES['nombreimg']['tmp_name'], $imagen)) 
+if(move_uploaded_file($_FILES['nombreimg']['tmp_name'],$imagen)) 
 { 
 echo "El archivo ". basename( $_FILES['nombreimg']['name'])." ha sido subido exitosamente!"; 
 } 

@@ -1,7 +1,7 @@
 <?php 
-require_once('query.php');
+require_once('conexion.php');
 
-class addProductosObjetivosModels extends query {
+class addProductosObjetivosModels extends conexion {
 
 	public function __construct() { 
       parent::__construct();
@@ -42,9 +42,9 @@ class addProductosObjetivosModels extends query {
 												  			$checkobjetivo="checked";
 												  	
 												  		};
-   															 
+   														
 
-													echo  "<li id='".$producto['id'] ."'><input  id='".$obj['id_objetivo'] ."' class='checkobjetivo' type='checkbox' name='objetivo' ".$checkobjetivo." />".$obj['nombre_objetivo'] ."</li>"; 
+													echo  "<li id='".$producto['id'] ."'>".$obj['nombre_objetivo'] ."</li>"; 
 
 													 echo "<ul>" ;
 															 $objs2 = Db::getInstance()->executeS("SELECT * FROM ps_subobjetivos WHERE id_objetivo='".$obj['id_objetivo'] ."'");
@@ -68,7 +68,7 @@ class addProductosObjetivosModels extends query {
 												  	
 												  		};
 
-															 		echo  "<li id='".$producto['id'] ."'><input id='".$obj2['id_subobjetivo'] ."' class='checkobjetivo'  type='checkbox'  name='subobjetivo' ".$checksubobjetivo."/>".$obj2['nombre_subobjetivo'] ."</li>"; 
+															 		echo  "<li id='".$producto['id'] ."'><input id='".$obj2['id_subobjetivo'] ."' class='checkobjetivo'  type='checkbox'  name='subobjetivo' ".$checksubobjetivo."/><label for='checkbox-1'></label>".$obj2['nombre_subobjetivo'] ."</li>"; 
 
 															 	};
 													 echo"</ul>";
@@ -120,7 +120,7 @@ class addProductosObjetivosModels extends query {
 
 
 
-													echo  "<li id='".$producto['id'] ."'><input  id='".$obj['id_objetivo'] ."' class='checkobjetivo' type='checkbox'  name='objetivo' ".$checkobjetivo."/>".$obj['nombre_objetivo'] ."</li>"; 
+													echo  "<li id='".$producto['id'] ."'>".$obj['nombre_objetivo'] ."</li>"; 
 
 													 echo "<ul>" ;
 
@@ -148,7 +148,7 @@ class addProductosObjetivosModels extends query {
 
 
 
-															 		echo  "<li id='".$producto['id'] ."'><input   id='".$obj2['id_subobjetivo'] ."' class='checkobjetivo' type='checkbox'  name='subobjetivo' ".$checksubobjetivo." />".$obj2['nombre_subobjetivo'] ."</li>"; 
+															 		echo  "<li id='".$producto['id'] ."'><input   id='".$obj2['id_subobjetivo'] ."' class='checkobjetivo' type='checkbox'  name='subobjetivo' ".$checksubobjetivo." /><label for='checkbox-1'></label>".$obj2['nombre_subobjetivo'] ."</li>"; 
 
 															 	};
 													 echo"</ul>";

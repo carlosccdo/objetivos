@@ -20,7 +20,7 @@ $(document).ready(function() {
 //seleccionar objetivo o subjetivo 
 
 
-            $(document).ready(function() {
+$(document).ready(function() {
 
 
                 $('#seleccionar input:radio[name=tipo]').on('change', function() {
@@ -33,19 +33,22 @@ $(document).ready(function() {
                         $("#selecObjetivo").css("display","none");
                         $(".hid").css("display", "none");
                         $("#hid2").css("display", "none");
+                        $("#ocultarGenero").css("display", "none");
                         $('#selecObjetivo').prop('selectedIndex',0);
                         break;
 
                         case "Sub-objetivos":
                         $("#selecObjetivo").css("display", "inline-block");
-                        $(".hid").css("display", "inline-block");
-                        $("#hid2").css("display", "inline-block");
+                        $(".hid").css("display", "block");
+                        $("#ocultarGenero").css("display", "table-row");
+                        $("#hid2").css("display", "table-row");
                         break;
                         
                         default:
                         $("#selecObjetivo").css("display", "none");
                          $(".hid").css("display", "none");
                          $("#hid2").css("display", "none");
+                          $("#ocultarGenero").css("display", "none");
                         $('#selecObjetivo').prop('selectedIndex',0);
               
                     }
@@ -56,14 +59,14 @@ $(document).ready(function() {
                 });
 
 
-            });
+ });
 
 
 
 //crear objetivo
 
 
-$(document).ready(function() {
+  $(document).ready(function() {
 
 
 	 $('#section-bar-1').on('click','#enviar-btn', function(e) {  
@@ -97,9 +100,6 @@ $(document).ready(function() {
 					 $('#messagesObjetivo').html('<p>Elige un objetivo padre</p>');
 					 $("#selecObjetivo").focus();
 
-
-					
-
 				}
 
 //si no hay nombre
@@ -114,8 +114,8 @@ $(document).ready(function() {
 					$.ajax({
 						type: "POST",
 						url: "controllers/crearControllers.php",
-						data: { objetivo:objetivo,obj:obj,selectSub:selectSub,imgObjetivo:imgObjetivo,descripcion:descripcion,genero:genero },
-
+						data: { objetivo:objetivo,obj:obj,selectSub:selectSub,imgObjetivo:imgObjetivo,descripcion:descripcion,genero:genero,valor:1 },
+            cache: false,
 						}).done(function(msg) {
 							
 			                 
@@ -133,10 +133,10 @@ $(document).ready(function() {
                       
 
 
-			               if(html(msg) != "<p>el nombre ya existe</p>"){
+			               /**if(html(msg) != "<p>el nombre ya existe</p>"){
 			                location.reload();
 			                
-			               };
+			               };**/
 
 			            });
 
@@ -151,15 +151,13 @@ $(document).ready(function() {
 						 // form_data.append("user_id", 123) // Adding extra parameters to form_data
 					  	$.ajax({
 						    url: "controllers/subirImagen.php", // Upload Script
+                cache: false,
 						    contentType: false,
 						    processData: false,
 						    data: form_data, // Setting the data attribute of ajax with file_data
 						    type: 'post'
 
 			  			});
-
-
-
 
 
 			};
@@ -182,7 +180,7 @@ $(document).ready(function() {
 
    					$.ajax({
                     type: "POST",
-                    url: "controllers/refrescarObjetivos.php",
+                    url: "controllers/editarControllers.php",
                     data: {valor:1}
                     }).done(function(msg) {                      
                         $('#section-bar-3').html(msg);
@@ -192,6 +190,10 @@ $(document).ready(function() {
 
         });
 });
+
+
+
+
 
 //actualizamos los objetivos  del select
 
@@ -203,7 +205,7 @@ $(document).ready(function() {
 
    					$.ajax({
                     type: "POST",
-                    url: "controllers/refrescarObjetivos.php",
+                    url: "controllers/crearControllers.php",
                     data: {valor:2}
                     }).done(function(msg) {                
                         $('#selecObjetivo').html(msg);
@@ -246,7 +248,7 @@ $(document).ready(function() {
 		             $.ajax({
                     type: "POST",
                     url: "controllers/addProductosObjetivosControllers.php",
-                      data: {tipo:tipo,idobjetivo:idobjetivo,idproducto:idproducto,estado:estado}
+                      data: {tipo:tipo,idobjetivo:idobjetivo,idproducto:idproducto,estado:estado,valor:1}
                     }).done(function(msg) {
 
                         
@@ -275,8 +277,8 @@ $(document).ready(function() {
 
                 $.ajax({
                     type: "POST",
-                    url: "controllers/buscarProductoControllers.php",
-                      data: {idBuscar: idBuscar}
+                    url: "controllers/addProductosObjetivosControllers.php",
+                      data: {idBuscar: idBuscar,valor:2}
                     }).done(function(msg) {
 
                         
@@ -300,8 +302,8 @@ $(document).ready(function() {
 
                 $.ajax({
                     type: "POST",
-                    url: "controllers/buscarProductoControllers.php",
-                      data: {nameBuscar: nameBuscar}
+                    url: "controllers/addProductosObjetivosControllers.php",
+                      data: {nameBuscar:nameBuscar,valor:2}
                     }).done(function(msg) {
 
                         
@@ -340,7 +342,7 @@ $(document).ready(function() {
 
                 $.ajax({
                     type: "POST",
-                    url: "controllers/refrescarObjetivos.php",
+                    url: "controllers/editarControllers.php",
                       data: {valor:3,id:id,tipo:tipo,valorr:valorr}
                     }).done(function(msg) {
 
@@ -359,16 +361,16 @@ $(document).ready(function() {
   $('#section-bar-3').on('keyup','textarea', function() { 
           
 
-             
+            
           
                 var valorr = $(this).val();
                  var id = $(this).parent().parent().prop('id');
                  var tipo = $(this).parent().parent().prop('class');
-                 
+                  
 
                 $.ajax({
                     type: "POST",
-                    url: "controllers/refrescarObjetivos.php",
+                    url: "controllers/editarControllers.php",
                       data: {valor:4,id:id,tipo:tipo,valorr:valorr}
                     }).done(function(msg) {
 
@@ -379,3 +381,146 @@ $(document).ready(function() {
                 });
                 
             });
+
+   //borrra objetivos
+
+ $(document).ready(function() {
+
+  $('#section-bar-3').on('click','.deleted', function() { 
+          
+              
+                 var id = $(this).parent().parent().prop('id');
+                 var tipo = $(this).parent().parent().prop('class');
+                  
+
+                $.ajax({
+                    type: "POST",
+                    url: "controllers/editarControllers.php",
+                      data: {valor:5,id:id,tipo:tipo}
+                    }).done(function(msg) {
+
+                      if(msg.existe=='no'){
+                        console.log('noooo');
+                      }else{
+
+                        $('#section-bar-3').html(msg);
+                       }
+
+                    });
+                });
+                
+            });
+
+
+
+//input file en una imagen
+ $(document).ready(function() {
+
+    $('#section-bar-3').on('click',"#imagenobjetivo >img ", function() { 
+      $(this).next().click();
+      
+
+    });
+
+  });
+
+
+
+
+
+//cambiar genero
+
+
+   $(document).ready(function() {
+
+  $('#section-bar-3').on('change',':radio', function() { 
+          
+
+             
+          
+                var valorr = $(this).val();
+                 var id = $(this).parent().parent().prop('id');
+                 var tipo = $(this).parent().parent().prop('class');
+                 
+
+                $.ajax({
+                    type: "POST",
+                    url: "controllers/editarControllers.php",
+                      data: {valor:7,id:id,tipo:tipo,valorr:valorr}
+                    }).done(function(msg) {
+
+                        
+                       
+
+                    });
+                });
+                
+            });
+
+
+  
+
+
+
+
+
+
+
+
+//recoger nuevo valor para cambiar imagen 
+$(document).ready(function() {
+
+  $('#section-bar-3').on('change','.my_file', function() {
+
+
+//subir fotos a directorio
+            
+              nombre = $(this).parent().parent().parent().find('td .nombreObjetivo').val();
+              var file_data = $(this).prop("files")[0]; // Getting the properties of file from file field
+              var form_data = new FormData(); // Creating object of FormData class
+              form_data.append("nombreimg", file_data); // Appending parameter named file with properties of file_field to form_data
+              form_data.append("objetivoNombre", nombre ) // Adding extra parameters to form_data
+             // form_data.append("user_id", 123) // Adding extra parameters to form_data
+              $.ajax({
+                url: "controllers/subirImagen.php", // Upload Script
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: form_data, // Setting the data attribute of ajax with file_data
+                type: 'post'
+
+              });
+
+
+
+
+//$(this).prop('src').substring(60);
+          img = $(this).val();
+          img = img.substring(img.lastIndexOf("\\") + 1, img.length);
+          id = $(this).parent().parent().parent().prop('id');
+          tipo = $(this).parent().parent().parent().prop('class');
+
+
+
+            $.ajax({
+            type: "POST",
+            url: "controllers/editarControllers.php",
+            cache: false,
+            global: false,
+            data: {valor:6,img:img,tipo:tipo,id:id},
+
+            }).done(function(msg) {
+              
+                          $('#section-bar-3').html(msg);
+
+                  });
+
+
+      
+            
+       
+          
+      
+         });
+
+  });
